@@ -26,11 +26,24 @@ async def obtenerporId(id:int):
 
 @app.get("/obtenerUsuarioNombre/{nombre}")
 async def obtenerporNombre(nombre:str):
-    nombreUsuario=filter(lambda nombreUsuario:nombreUsuario.nombre==nombre)
+    nombreUsuario=filter(lambda nombreUsuario:nombreUsuario.nombre==nombre,usuarios)
     try:
         return list(nombreUsuario)[0]
     except:
         return "Ha ocurrido algun error"
     
-    
-    
+
+@app.get("/user/")
+async def user(id:int):
+    return buscarPor(id)
+
+
+
+
+def buscarPor(id:int):
+    Atributo=filter(lambda atributo:atributo.id==id,usuarios)
+    try:
+        return list(Atributo)[0]
+    except:
+        return "Ha ocurrido un error"
+
